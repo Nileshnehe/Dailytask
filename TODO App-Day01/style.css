@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #DADEE1;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: rgb(69, 144, 78);
+}
+nav{
+    display: flex;
+    justify-content: center;
+}
+main{
+    display: flex;
+    justify-content: center;
+}
+.task-add{
+    display: flex;
+    justify-content: center;
+    padding: 40px 30px 70px;
+    width: 100%;
+    max-width: 540px;
+    background-color: white;
+}
+.list{
+ display: flex;
+ justify-content: space-around;
+}
+
+
+
+.ul-list button{
+    background-color: red;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
