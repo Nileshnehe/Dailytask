@@ -6,7 +6,7 @@ const Component = () => {
 
   return (
     <div>
-        {counter}
+        {CSSMathValue.count}
     </div>
   )
 }

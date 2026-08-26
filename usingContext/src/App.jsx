@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <counterContext.Provider value={count}>
+      <counterContext.Provider value={{count, setCount}}>
 
         <Component />
         <button onClick={() => setCount(count + 1)}>Inc</button>
