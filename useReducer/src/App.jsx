@@ -1,34 +1,14 @@
-import { useReducer } from "react";
+import BankAccount from './component/BankAccount'
+import ExpensiveComponent from './useMemo/ExpensiveComponent'
 
 const App = () => {
-
-  const reducer = (state, action) => {
-
-    
-
-    if (action.type === "Inc") {
-      return state + 1
-    };
-
-    if (action.type === "Dec") {
-      return state - 1;
-    };
-
-    console.log(state, action)
-  };
-
-  const [count, dispatch] = useReducer(reducer, 0)
-  console.log(useReducer(reducer, 0))
-
   return (
-    <>
-      <h1>{count}</h1>
-      <button onClick={() => dispatch({ type: "Inc" })}>Inc</button>
+    <div>App
+      {/* <BankAccount /> */}
 
-      <button onClick={() => dispatch({ type: "Dec" })}>Dec</button>
-    </>
+      <ExpensiveComponent/>
+    </div>
   )
-
 }
 
 export default App
