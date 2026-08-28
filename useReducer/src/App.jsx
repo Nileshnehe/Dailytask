@@ -1,34 +1,34 @@
-import { useReducer } from 'react';
+import { useReducer } from "react";
 
-const initialState = 0;
+const App = () => {
 
-function App() {
   const reducer = (state, action) => {
-    // Standard practice: check action.type
-    switch (action.type) { 
-      case "add":
-        return state + 1;
-      case "sub":
-        return state - 1;
-      default:
-        // You can print the invalid action type in the error console to see exactly what failed
-        throw new Error(`Unexpected action type: ${action.type}`);
-    }
-  }
 
-  const [count, dispatch] = useReducer(reducer, initialState)
+    
+
+    if (action.type === "Inc") {
+      return state + 1
+    };
+
+    if (action.type === "Dec") {
+      return state - 1;
+    };
+
+    console.log(state, action)
+  };
+
+  const [count, dispatch] = useReducer(reducer, 0)
+  console.log(useReducer(reducer, 0))
 
   return (
     <>
-      <h1>count is : {count}</h1>
-      {/* Pass an object instead of a string */}
-      <button onClick={() => dispatch({ type: "add" })}>Inc</button>
-      <button onClick={() => dispatch({ type: "sub" })}>Dec</button>
-      
-      {/* Testing button to trigger error */}
-      <button onClick={() => dispatch({ type: "broken_action" })}>Trigger Error</button>
+      <h1>{count}</h1>
+      <button onClick={() => dispatch({ type: "Inc" })}>Inc</button>
+
+      <button onClick={() => dispatch({ type: "Dec" })}>Dec</button>
     </>
   )
+
 }
 
-export default App;
+export default App
