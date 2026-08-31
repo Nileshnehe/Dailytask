@@ -1,0 +1,84 @@
+1. Code Example: Lifting State Up (The Solution)
+Jab do sibling components (SearchInput aur DisplayResult) ko same data chahiye hota hai, toh hum state ko unke common parent (App) mein rakhte hain. Isko hi State Lift karna kehte hain.
+
+import React, { useState } from 'react';
+
+// Sibling 1: Isko text change karna hai
+function SearchInput({ searchText, onSearchChange }) {
+  return (
+    <input 
+      type="text" 
+      value={searchText} 
+      onChange={(e) => onSearchChange(e.target.value)} 
+      placeholder="Type something..."
+    />
+  );
+}
+
+// Sibling 2: Isko text sirf dikhana hai
+function DisplayResult({ searchText }) {
+  return <h3>You are searching for: {searchText}</h3>;
+}
+
+// Common Parent: Yahan State "Lift" ki gayi hai
+export default function App() {
+  const [searchText, setSearchText] = useState(""); // State here!
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2>Lifting State Up Example</h2>
+      {/* State aur setter function dono bacchon ko props ke zariye diye */}
+      <SearchInput searchText={searchText} onSearchChange={setSearchText} />
+      <DisplayResult searchText={searchText} />
+    </div>
+  );
+}
+
+
+
+
+2. Code Example: Prop Drilling (The Problem)
+Yahan App component ke paas userName hai, jo sabse deep component (Avatar) ko chahiye. Is data ko wahan tak pahunchane ke liye Navbar aur Menu ko faltu mein is prop ko receive karke aage bhejari (courier boy) banna pad raha hai.
+
+import React, { useState } from 'react';
+
+// 4. Sabse deep child component (Jisko actually data chahiye)
+function Avatar({ userName }) {
+  return <div className="avatar">👤 {userName}</div>;
+}
+
+// 3. Intermediate Component (Bina matlab prop receive kar raha hai)
+function UserProfile({ userName }) {
+  // Isko userName ki zarurat nahi thi, par aage bhejne ke liye lena pada
+  return (
+    <div>
+      <p>Profile Section</p>
+      <Avatar userName={userName} /> 
+    </div>
+  );
+}
+
+// 2. Intermediate Component (Bina matlab prop receive kar raha hai)
+function Navbar({ userName }) {
+  return (
+    <nav>
+      <h2>My App</h2>
+      <UserProfile userName={userName} />
+    </nav>
+  );
+}
+
+// 1. Top Level Parent
+export default function App() {
+  const [userName, setUserName] = useState("Rahul_Dev");
+
+  return (
+    <div>
+      <h2>Prop Drilling Example</h2>
+      {/* Yahan se drilling shuru hui... */}
+      <Navbar userName={userName} />
+    </div>
+  );
+}
+
+The Fix: Isi Prop Drilling problem (Navbar aur UserProfile jese intermediate components ko bypass karne) ke liye humne pehle Context API ya Redux padha tha, jisse Avatar seedha parent se data fetch kar sake!
